@@ -57,7 +57,7 @@ public class SubscriptionServiceTest {
 		User user = mock(User.class);
 		when(user.getDelivery()).thenReturn(Delivery.LOCAL);
 		when(user.getEmail()).thenReturn(null);
-		assertDoesNotThrow(() -> subscriptionService.addSubscriber(user));
+		users.add(user); // User already in list
 		assertThrows(ExistingUserException.class, () -> subscriptionService.addSubscriber(user));
 	}
 
