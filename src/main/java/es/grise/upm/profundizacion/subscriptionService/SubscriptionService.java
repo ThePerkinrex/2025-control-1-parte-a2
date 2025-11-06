@@ -16,8 +16,13 @@ public class SubscriptionService {
 	/*
 	 * Method to code
 	 */
-	public void addSubscriber(User user) {
-		
+	public void addSubscriber(User user) throws NullUserException, ExistingUserException, LocalUserDoesNotHaveNullEMailException {
+		if (user == null) throw new NullUserException();
+		if (this.getSubscribers().contains(user)) throw new ExistingUserException();
+
+		if(Delivery.LOCAL.equals(user.getDelivery()) && user.getEmail() != null) throw new LocalUserDoesNotHaveNullEMailException();
+
+		this.getSubscribers().add(user);
 	}
 	
 	/*
